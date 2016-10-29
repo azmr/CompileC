@@ -1,19 +1,26 @@
 @echo off
 
+setlocal
+
+set BuildDirectory=E:\Documents\Coding\C\build
+set SourceDirectory=E:\Documents\Coding\C
+set ShellDirectory=E:\Documents\Coding\C
+set HeaderDirectory=E:\Documents\Coding\C\h
+
 >build.bat (
 	for %%L in (
 		"@echo off"
 		""
-		"set CommonCompilerFlags=-nologo -MTd -fp:fast -Gm- -GR- -EHa -WX -Oi -W4 -FC -wd4201 -IE:\Documents\Coding\C\h"
+		"set CommonCompilerFlags=-nologo -MTd -fp:fast -Gm- -GR- -EHa -WX -Oi -W4 -FC -wd4201 -I%HeaderDirectory%"
 		"set DebugCompilerFlags=-Od -Z7"
 		"set CommonLinkerFlags=-incremental:no -opt:ref"
 		""
-		"IF NOT EXIST E:\Documents\Coding\C\build mkdir E:\Documents\Coding\C\build"
-		"pushd E:\Documents\Coding\C\build"
+		"IF NOT EXIST %BuildDirectory% mkdir %BuildDirectory%"
+		"pushd %BuildDirectory%"
 		""
-		"call E:\Documents\Coding\C\shell64.bat"
+		"call %ShellDirectory%\shell64.bat"
 		""
-		"timethis cl %%CommonCompilerFlags%% %%DebugCompilerFlags%% E:\Documents\Coding\C\%1\%1.c -Fm%1.map /link %%CommonLinkerFlags%% -PDB:%1_%%random%%.pdb"
+		"timethis cl %%CommonCompilerFlags%% %%DebugCompilerFlags%% %SourceDirectory%\%1\%1.c -Fm%1.map /link %%CommonLinkerFlags%% -PDB:%1_%%random%%.pdb"
 		"echo Finished at %%time%%"
 		""
 		"popd"
@@ -48,3 +55,4 @@
 		"REM C4204: nonstandard extension used: non-constant aggregate initializer"
 	) do echo. %%~L
 )
+endlocal
