@@ -8,8 +8,8 @@ I have a cmd window shortcut in the taskbar with the target:
 ```
 So when cmd opens, it automatically calls my batch file, which calls MSVC's and sets up the path.
 
-#builder.bat
-##Background
+# builder.bat
+## Background
 Following Casey Muratori's lead (from his Handmade Hero series), I use a .bat file to compile my C files.
 I have Vim set up to call the batch file with <F6> with the following statements in my .vimrc:
 ``` VimL
@@ -26,11 +26,11 @@ augroup c_win
 augroup END
 ```
 
-##Script Description
+## Script Description
 This creates a file called `build.bat` in the working directory, which, when called,
 calls `shell64.bat` (in `ShellDirectory`) then compiles a C file to a build directory. (You'll probably want to change the build directory if you use this.)
 
-##Usage
+## Usage
 From the command line, with the working directory wherever you want your build file to be, use the command:
 ```
 path/to/builder.bat name
@@ -42,7 +42,7 @@ e.g.:
 ```
 This will make a `build.bat` file to compile a `gfx.c` file from `SourceDirectory/gfx` into the `BuildDirectory`.
 
-##Other notes
+## Other notes
 
  - There is also a `HeaderDirectory`, for wherever you keep your project-independent header files.
 
